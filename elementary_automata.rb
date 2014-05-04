@@ -2,10 +2,10 @@ require_relative 'rule'
 require_relative 'printers'
 
 class ElementaryAutomata
-  def initialize(seed=nil, printer=TerminalPrinter.new, rule=Rule.new(126))
-    @state = seed || ['0']*40+['1']+['0']*40
-    @rule = rule
-    @printer = printer
+  def initialize(options={})
+    @state   = options[:seed] || ['0']*40+['1']+['0']*40
+    @rule    = options[:rule] || Rule.new(126)
+    @printer = options[:printer] || TerminalPrinter.new
   end
 
   def start(n=50)
