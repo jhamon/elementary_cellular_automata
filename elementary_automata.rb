@@ -1,12 +1,14 @@
-class OneTen
-  DIE = ['111', '100', '000']
+require_relative 'rule'
+require_relative 'printers'
 
-  def initialize(seed=nil, printer=TerminalPrinter.new)
-    @state = seed || ['1']*80
+class ElementaryAutomata
+  def initialize(seed=nil, printer=TerminalPrinter.new, rule=Rule.new(126))
+    @state = seed || ['0']*40+['1']+['0']*40
+    @rule = rule
     @printer = printer
   end
 
-  def start(n=1000)
+  def start(n=50)
     @printer.print(@state)
     n.times { self.step }
   end
@@ -20,19 +22,11 @@ class OneTen
   def apply_rules
     @next_state = @state.dup
     (1...@state.length-2).to_a.each do |i|
-      three = @state[i-1, 3].join('')
-      @next_state[i] = DIE.include?(three) ? '0' : '1'
+      triple = @state[i-1, 3].join('')
+      @next_state[i] = @rule.apply(triple)
     end
   end
 end
 
-class TerminalPrinter
-  SYMBOLS = {'0' => ' ', '1' => '█'}
-
-  def print(data_array)
-    puts data_array.map { |sym| SYMBOLS[sym] }.join('')
-  end
-end
-
-oneten = OneTen.new()
-oneten.start
+auto = ElementaryAutomata.new
+auto.start
