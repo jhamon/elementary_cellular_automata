@@ -10,8 +10,16 @@ A cell and its neighbors can be in any of eight different configurations.  A rul
 As a convenience, rule names are expressed as the decimal representation of the output rules interpreted as a binary number. For example, the following rule would be referred to as "Rule 73" because the binary number `01001001` is the decimal number 73:
   
 
-cell states     | `111` | `110` | `101` | `100` | `011` | `010` | `001` | `000`
-next generation |  `0`  |  `1`  |  `0`  |  `0`  |  `1`  |  `0`  |  `0`  |  `1`
+| current cell state | next generation|
+|:------------------:|:---------------|
+|  `111`             | `0`            |
+|  `110`             | `1`            |
+|  `101`             | `0`            |
+|  `100`             | `0`            |
+|  `011`             | `1`            |
+|  `010`             | `0`            |
+|  `001`             | `0`            |
+|  `000`             | `1`            |
 
 ## Setup / Dependencies
 
