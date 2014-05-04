@@ -6,10 +6,10 @@ class ElementaryAutomata
     @state   = options[:seed] || '0'*50+'1'+'0'*50
     @rule    = options[:rule] || Rule.new(126)
     @printer = options[:printer] || TerminalPrinter.new
+    @printer.print(@state)
   end
 
-  def start(n=500)
-    @printer.print(@state)
+  def run(n=500)
     n.times { step }
   end
 
@@ -38,4 +38,4 @@ class ElementaryAutomata
 end
 
 auto = ElementaryAutomata.new
-auto.start
+auto.run
