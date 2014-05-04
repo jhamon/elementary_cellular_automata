@@ -2,14 +2,16 @@ require_relative 'rule'
 require_relative 'printers'
 
 class ElementaryAutomata
+  DEFAULT_SEED = '000000000000000010000000000000000'
+
   def initialize(options={})
-    @state   = options[:seed] || '0'*50+'1'+'0'*50
-    @rule    = options[:rule] || Rule.new(126)
+    @state   = options[:seed] || DEFAULT_SEED
+    @rule    = options[:rule] || Rule.new(73)
     @printer = options[:printer] || TerminalPrinter.new
     @printer.print(@state)
   end
 
-  def run(n=500)
+  def run(n=@seed.length)
     n.times { step }
   end
 
@@ -36,6 +38,3 @@ class ElementaryAutomata
       @next_state[-1] = @rule.apply(right_triple)
     end
 end
-
-auto = ElementaryAutomata.new
-auto.run
