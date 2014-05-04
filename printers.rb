@@ -28,15 +28,24 @@ class PNGPrinter
   end
 
   def save
-    width = @data[0].length
-    height = @data.length
-    @file = ChunkyPNG::Image.new(width, height, ChunkyPNG::Color::BLACK)
-    @data.each_with_index do |row, r|
-      row.each_with_index do |col, c|
-        @file[c, r] = col
+    create_image
+    write_data
+    @image.save(@filename, :interlace => true)
+    puts "Data written to #{@filename}"
+  end
+
+  private
+    def write_data
+      @data.each_with_index do |row, r|
+        row.each_with_index do |col, c|
+          @image[c, r] = col
+        end
       end
     end
-    @file[1,1] = ChunkyPNG::Color.rgba(10, 20, 30, 128)
-    @file.save(@filename, :interlace => true)
-  end
+
+    def create_image
+      width = @data[0].length
+      height = @data.length
+      @image = ChunkyPNG::Image.new(width, height, ChunkyPNG::Color::BLACK)
+    end
 end
