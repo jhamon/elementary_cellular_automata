@@ -1,18 +1,17 @@
 # Elementary Cellular Automata
 
-Elementary Cellular Automata (ECA) are the simplest type of cellular automaton.  ECAs operate in 1 dimension only.  The system state is represented by a list of bits, which are updated once per iteration based on rules.  In every iteration, a cell may live or die depending on its value and the value of its two neighbors.  In visual representations of ECAs, time is usually represented by appending the current state of an ECA to the bottom of the previous output.
+Elementary Cellular Automata (ECA) are the simplest type of cellular automaton.  ECAs operate in 1 dimension only.  The system state is represented by a list of bits, which are updated once per iteration based on rules you specify.  In visual representations of ECAs, time is usually represented by appending the current state of an ECA to the bottom of the previous output.
 
 ## Rules
 
+In every iteration, a cell may live or die depending on its value and the value of its two neighbors.  
 A cell and its neighbors can be in any of eight different configurations.  A rule governs what value these states map to in the next generation, and there are `2**8=256` possible rules although many combinations of rules produce indistinguishable results from one another.
 
 As a convenience, rule names are expressed as the decimal representation of the output rules interpreted as a binary number. For example, the following rule would be referred to as "Rule 73" because the binary number `01001001` is the decimal number 73:
   
 
 cell states     | `111` | `110` | `101` | `100` | `011` | `010` | `001` | `000`
------------------------------------------------
 next generation |  `0`  |  `1`  |  `0`  |  `0`  |  `1`  |  `0`  |  `0`  |  `1`
-
 
 ## Setup / Dependencies
 
@@ -27,15 +26,15 @@ $ ruby runner.rb 182 1440 900
 Data written to 182.png
 ```
 
-This would create a game that is 1440 pixels wide and run it for 900 generations before saving the output to a deskto-wallpaper sized 1440x900 pixel png file called `182.png`.  The example output images were all created with this tool, but at a more modest 200x200 pixel output size.
+This would create a game that is 1440 pixels wide and run it for 900 generations before saving the output to a desktop-wallpaper sized 1440x900 pixel png file called `182.png`.  The example output images were all created with this tool, but at a more modest output size.
 
 ## Seeding the simulation for custom output
 
 The only way we can influence the output is in our rule selection and selection of seed state.  You can easily run the simulation with a custom seed by passing one in the options hash when instantiating a new automaton.  
 
 ```ruby
-seed             = '10101000001100001100000111' # or whatever
-rule             = Rule.new(30)
+seed = '10101000001100001100000111' # or whatever
+rule = Rule.new(30)
 automaton = ElementaryAutomata.new(:seed => seed, 
                                    :rule => rule)
 automaton.run(300) # Run for 300 generations
@@ -44,9 +43,9 @@ automaton.run(300) # Run for 300 generations
 By default `ElementaryAutomata` will print output to STDOUT with a `TerminalPrinter` instance, but if you'd like to save output as images you should also pass an instance of `PNGPrinter` to the automaton and call `save` on it after the simulation is finished.
 
 ```ruby
-seed             = '10101000001100001100000111' # or whatever
-rule             = Rule.new(30)
-printer          = PNGPrinter.new
+seed    = '10101000001100001100000111' # or whatever
+rule    = Rule.new(30)
+printer = PNGPrinter.new
 
 automaton = ElementaryAutomata.new(:seed => seed, 
                                    :rule => rule,
