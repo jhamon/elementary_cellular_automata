@@ -1,4 +1,4 @@
-# Elementary Cellular Automata
+# Elementary Cellular Automata [![Code Climate](https://codeclimate.com/github/jhamon/elementary_cellular_automata.png)](https://codeclimate.com/github/jhamon/elementary_cellular_automata)
 
 Elementary Cellular Automata (ECA) are the simplest type of cellular automaton.  ECAs operate in 1 dimension only.  The system state is represented by a list of bits which are updated once per iteration based on rules you specify.  In visual representations of ECAs, time is usually shown by appending the current state of an ECA to the bottom of the previous output.
 
